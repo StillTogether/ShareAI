@@ -4,6 +4,7 @@ import torch.nn as nn
 from model import LeNet
 import torch.optim as optim
 import torchvision.transforms as transforms
+from datetime import datetime
 
 
 def main():
@@ -33,6 +34,10 @@ def main():
     net = LeNet()
     loss_function = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=0.001)
+
+    current_time = datetime.now()
+    start_time = current_time.strftime("%H:%M:%S")
+    print("Start time:", start_time)
 
     for epoch in range(5):  # loop over the dataset multiple times
 
@@ -65,6 +70,7 @@ def main():
 
     save_path = './Lenet.pth'
     torch.save(net.state_dict(), save_path)
+    print("Finish time:", datetime.now().strftime("%H:%M:%S"))
 
 
 if __name__ == '__main__':
